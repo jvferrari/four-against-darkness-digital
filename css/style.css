@@ -1,0 +1,91 @@
+/* css/style.css */
+body {
+    font-family: 'Courier New', monospace;
+    background: #1a1a1a;
+    color: #ccc;
+    margin: 0;
+    padding: 20px;
+}
+
+.game-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.room-display {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 5px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.content-display {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 5px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.controls-display {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.room-grid {
+    background: #000;
+    padding: 10px;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.grid-row {
+    clear: both;
+}
+
+.cell {
+    width: 24px;
+    height: 24px;
+    float: left;
+    text-align: center;
+    line-height: 24px;
+    border: 1px solid #333;
+    font-size: 12px;
+}
+
+.cell.floor { background: #444; color: #aaa; }
+.cell.wall { background: #666; color: #ddd; }
+.cell.door { background: #8B4513; color: #fff; font-weight: bold; }
+.cell.void { background: transparent; border-color: transparent; }
+
+button {
+    background: #4a4a4a;
+    color: #fff;
+    border: 1px solid #666;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 3px;
+}
+
+button:hover {
+    background: #5a5a5a;
+}
+
+.exit-btn {
+    background: #2d5a2d;
+}
+
+.back-btn {
+    background: #5a2d2d;
+}
+
+h3, h4 {
+    color: #fff;
+    margin-top: 0;
+}

@@ -1,0 +1,46 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Four Against Darkness - Digital</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Four Against Darkness - Protótipo</h1>
+    
+    <div class="game-controls">
+        <button id="new-game-btn">Novo Jogo</button>
+        <button id="load-game-btn">Carregar Jogo</button>
+        <button id="explore-btn" style="display: none;">Explorar Sala</button>
+    </div>
+    
+    <div class="game-container">
+        <div id="room-container" class="room-display">
+            <!-- Sala será renderizada aqui -->
+        </div>
+        
+        <div id="content-container" class="content-display">
+            <!-- Conteúdo da sala será renderizado aqui -->
+        </div>
+        
+        <div id="controls-container" class="controls-display">
+            <!-- Controles de navegação serão renderizados aqui -->
+        </div>
+    </div>
+    
+    <div id="debug-info" style="margin-top: 20px; font-size: 12px; color: #666;">
+        <!-- Informações de debug -->
+    </div>
+    
+    <script src="js/utils/Random.js"></script>
+    <script src="js/game/SeedManager.js"></script>
+    <script src="js/game/RoomGenerator.js"></script>
+    <script src="js/game/RoomContentGenerator.js"></script>
+    <script src="js/game/DungeonMap.js"></script>
+    <script src="js/game/GameEngine.js"></script>
+    <script src="js/game/UI/RoomRenderer.js"></script>
+    <script src="js/game/UI/ContentRenderer.js"></script>
+    <script src="js/game/UI/ControlsRenderer.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
