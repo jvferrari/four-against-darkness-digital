@@ -2,7 +2,7 @@
 class SeedManager {
     constructor(seed = null) {
         this.baseSeed = seed || this.generateSeed();
-        this.seedMap = new Map(); // Mapeia códigos d66 para seeds específicas
+        this.seedMap = new Map();
         this.initSeedMap();
     }
     
@@ -11,7 +11,6 @@ class SeedManager {
     }
     
     initSeedMap() {
-        // Para cada possível código d66 (11-66), cria uma seed derivada
         for (let tens = 1; tens <= 6; tens++) {
             for (let units = 1; units <= 6; units++) {
                 const code = `${tens}${units}`;
@@ -22,7 +21,6 @@ class SeedManager {
     }
     
     createDerivedSeed(code) {
-        // Combina a seed base com o código para criar uma seed única
         return this.hashCode(`${this.baseSeed}:${code}`).toString();
     }
     
@@ -40,8 +38,8 @@ class SeedManager {
         return this.seedMap.get(d66Code.toString()) || this.baseSeed;
     }
     
-    getRandomForRoom(d66Code) {
-        const seed = this.getRoomSeed(d66Code);
+    getRandomForCode(code) {
+        const seed = this.getRoomSeed(code);
         return new Random(seed);
     }
 }

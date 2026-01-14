@@ -1,0 +1,66 @@
+[
+  {
+    "id": "warrior",
+    "name": "Guerreiro",
+    "icon": "⚔️",
+    "description": "Especialista em combate corpo a corpo",
+    "hp": 7,
+    "attack": 1
+  },
+  {
+    "id": "cleric",
+    "name": "Clérigo", 
+    "icon": "🙏",
+    "description": "Poderes divinos de cura e proteção",
+    "hp": 5,
+    "attack": 0.5
+  },
+  {
+    "id": "rogue",
+    "name": "Ladino",
+    "icon": "🗡️",
+    "description": "Especialista em armadilhas e furtividade",
+    "hp": 4,
+    "attack": 0
+  },
+  {
+    "id": "wizard",
+    "name": "Bruxo",
+    "icon": "🔮",
+    "description": "Conjurador de feitiços poderosos",
+    "hp": 3,
+    "attack": 0
+  },
+  {
+    "id": "barbarian",
+    "name": "Bárbaro",
+    "icon": "🪓",
+    "description": "Fúria incontrolável e força bruta",
+    "hp": 8,
+    "attack": 1
+  },
+  {
+    "id": "dwarf",
+    "name": "Anão",
+    "icon": "⛏️",
+    "description": "Resistente e especialista em minerais",
+    "hp": 6,
+    "attack": 1
+  },
+  {
+    "id": "elf",
+    "name": "Elfo",
+    "icon": "🏹",
+    "description": "Arqueiro habilidoso com toques de magia",
+    "hp": 5,
+    "attack": 1
+  },
+  {
+    "id": "halfling",
+    "name": "Halfling",
+    "icon": "🍃",
+    "description": "Ágil, sortudo e excelente ladrão",
+    "hp": 4,
+    "attack": 0
+  }
+]

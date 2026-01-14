@@ -1,0 +1,46 @@
+{
+  "minions": [
+    {
+      "id": "goblin",
+      "name": "Goblin",
+      "level": 3,
+      "hp": 1,
+      "treasureMod": -1,
+      "description": "Pequenas criaturas verdes e maliciosas.",
+      "reactions": [
+        {"roll": "1-3", "action": "flee"},
+        {"roll": "4-5", "action": "bribe", "amount": 5},
+        {"roll": "6", "action": "fight"}
+      ]
+    },
+    {
+      "id": "skeleton",
+      "name": "Esqueleto",
+      "level": 3,
+      "hp": 1,
+      "treasureMod": 0,
+      "description": "Mortos-vivos animados por magia negra.",
+      "reactions": [
+        {"roll": "1-6", "action": "fight_to_death"}
+      ],
+      "special": "Crushing weapons +1"
+    }
+  ],
+  "bosses": [
+    {
+      "id": "ogre",
+      "name": "Ogro",
+      "level": 5,
+      "hp": 6,
+      "attacks": 1,
+      "treasureMod": 0,
+      "description": "Uma criatura grande e brutal.",
+      "special": "Deals 2 damage per hit",
+      "reactions": [
+        {"roll": "1", "action": "bribe", "amount": 30},
+        {"roll": "2-3", "action": "fight"},
+        {"roll": "4-6", "action": "fight_to_death"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+/* Responsividade para dispositivos móveis */
+@media (max-width: 480px) {
+    .screen {
+        padding: 10px;
+    }
+    
+    .start-container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+    
+    .start-container h1 {
+        font-size: 2rem;
+    }
+    
+    .btn-primary, .btn-secondary, .btn-tertiary {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    
+    .class-select-container {
+        margin: 10px auto;
+        padding: 15px;
+    }
+    
+    .class-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .class-card {
+        padding: 10px;
+    }
+    
+    .game-layout {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .dungeon-map, .party-panel {
+        width: 100%;
+        height: auto;
+        min-height: 150px;
+    }
+    
+    .map-grid {
+        grid-template-columns: repeat(auto-fill, minmax(15px, 1fr));
+    }
+    
+    .map-cell {
+        width: 15px;
+        height: 15px;
+    }
+    
+    .current-room, .room-content, .game-controls, .game-log {
+        padding: 10px;
+    }
+    
+    .control-btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        flex: 1 1 calc(50% - 5px);
+    }
+    
+    /* Otimização para touch */
+    .control-btn {
+        min-height: 44px; /* Tamanho mínimo para toque */
+    }
+    
+    /* Ajuste para rolagem suave */
+    .game-log {
+        max-height: 150px;
+    }
+    
+    /* Menu hamburguer para mobile (se necessário) */
+    .mobile-menu-toggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1001;
+        background: rgba(0, 0, 0, 0.8);
+        border: 1px solid #4cc9f0;
+        color: #4cc9f0;
+        width: 44px;
+        height: 44px;
+        border-radius: 5px;
+        font-size: 1.5rem;
+    }
+    
+    /* Esconder elementos menos importantes em mobile */
+    .version {
+        font-size: 0.8rem;
+    }
+    
+    .class-card .class-stats {
+        flex-direction: column;
+        gap: 2px;
+    }
+}
+
+/* Orientação paisagem em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .start-container {
+        margin: 10px auto;
+        padding: 15px;
+    }
+    
+    .start-container h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .start-buttons {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .game-layout {
+        height: calc(100vh - 20px);
+    }
+    
+    .dungeon-map, .party-panel {
+        flex: 0 0 150px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 1024px) {
+    .game-layout {
+        flex-wrap: wrap;
+    }
+    
+    .dungeon-map {
+        flex: 0 0 200px;
+    }
+    
+    .party-panel {
+        flex: 0 0 200px;
+    }
+    
+    .main-game-area {
+        flex: 1 1 100%;
+        order: 3;
+    }
+}

@@ -1,0 +1,128 @@
+// js/utils/Random.js
+class Random {
+    constructor(seed = null) {
+        if (typeof seed === 'string') {
+            let hash = 0;
+            for (let i = 0; i < seed.length; i++) {
+                hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+                hash = hash & hash;
+            }
+            this.seed = Math.abs(hash);
+        } else {
+            this.seed = seed || Date.now();
+        }
+        this.current = this.seed;
+    }
+    
+    next() {
+        this.current = (this.current * 9301 + 49297) % 233280;
+        return this.current / 233280;
+    }
+    
+    int(min, max) {
+        return Math.floor(this.next() * (max - min + 1)) + min;
+    }
+    
+    rollDice(count, sides) {
+        let total = 0;
+        for (let i = 0; i < count; i++) {
+            total += this.int(1, sides);
+        }
+        return total;
+    }
+    
+    rollD66() {
+        const tens = this.int(1, 6);
+        const units = this.int(1, 6);
+        return parseInt(`${tens}${units}`);
+    }
+    
+    choice(array) {
+        return array[this.int(0, array.length - 1)];
+    }
+}<!-- test.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste Four Against Darkness</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Teste do Projeto</h1>
+    
+    <div id="tests">
+        <h2>Verificando arquivos:</h2>
+        <ul id="file-list"></ul>
+        
+        <h2>Testando Classes JavaScript:</h2>
+        <ul id="class-list"></ul>
+    </div>
+    
+    <script>
+        // Lista de arquivos esperados
+        const files = [
+            'index.html',
+            'css/style.css',
+            'css/responsive.css',
+            'js/main.js',
+            'js/utils/Random.js',
+            'js/game/Character.js',
+            'js/game/PartyManager.js',
+            'js/game/SeedManager.js',
+            'js/game/RoomGenerator.js',
+            'js/game/DungeonMap.js',
+            'js/game/GameEngine.js',
+            'js/game/ui/RoomRenderer.js',
+            'js/game/ui/ControlsRenderer.js'
+        ];
+        
+        const fileList = document.getElementById('file-list');
+        const classList = document.getElementById('class-list');
+        
+        // Testa arquivos
+        files.forEach(file => {
+            const li = document.createElement('li');
+            fetch(file)
+                .then(response => {
+                    if (response.ok) {
+                        li.innerHTML = `<span class="success">✓</span> ${file}`;
+                    } else {
+                        li.innerHTML = `<span class="error">✗</span> ${file} (Não encontrado)`;
+                    }
+                })
+                .catch(() => {
+                    li.innerHTML = `<span class="error">✗</span> ${file} (Erro ao carregar)`;
+                });
+            fileList.appendChild(li);
+        });
+        
+        // Testa classes JavaScript
+        setTimeout(() => {
+            const classes = [
+                { name: 'Random', test: () => typeof Random !== 'undefined' },
+                { name: 'Character', test: () => typeof Character !== 'undefined' },
+                { name: 'PartyManager', test: () => typeof PartyManager !== 'undefined' },
+                { name: 'GameEngine', test: () => typeof GameEngine !== 'undefined' }
+            ];
+            
+            classes.forEach(cls => {
+                const li = document.createElement('li');
+                try {
+                    if (cls.test()) {
+                        li.innerHTML = `<span class="success">✓</span> Classe ${cls.name} carregada`;
+                    } else {
+                        li.innerHTML = `<span class="error">✗</span> Classe ${cls.name} não encontrada`;
+                    }
+                } catch (e) {
+                    li.innerHTML = `<span class="error">✗</span> Erro ao testar ${cls.name}: ${e.message}`;
+                }
+                classList.appendChild(li);
+            });
+        }, 1000);
+    </script>
+</body>
+</html>

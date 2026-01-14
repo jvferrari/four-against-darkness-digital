@@ -1,22 +1,20 @@
 // js/utils/Random.js
 class Random {
-    constructor(seed) {
-        this.seed = this.hashCode(seed);
+    constructor(seed = null) {
+        if (typeof seed === 'string') {
+            let hash = 0;
+            for (let i = 0; i < seed.length; i++) {
+                hash = ((hash << 5) - hash) + seed.charCodeAt(i);
+                hash = hash & hash;
+            }
+            this.seed = Math.abs(hash);
+        } else {
+            this.seed = seed || Date.now();
+        }
         this.current = this.seed;
     }
     
-    hashCode(str) {
-        let hash = 0;
-        for (let i = 0; i < str.length; i++) {
-            const char = str.charCodeAt(i);
-            hash = ((hash << 5) - hash) + char;
-            hash = hash & hash;
-        }
-        return Math.abs(hash);
-    }
-    
     next() {
-        // Gerador LCG simples
         this.current = (this.current * 9301 + 49297) % 233280;
         return this.current / 233280;
     }
@@ -33,7 +31,6 @@ class Random {
         return total;
     }
     
-    // Rola d66 (2 dados: um para dezenas, outro para unidades)
     rollD66() {
         const tens = this.int(1, 6);
         const units = this.int(1, 6);

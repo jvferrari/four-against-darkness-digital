@@ -1,91 +1,434 @@
-/* css/style.css */
-body {
-    font-family: 'Courier New', monospace;
-    background: #1a1a1a;
-    color: #ccc;
+/* Reset e configurações gerais */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e6e6e6;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Telas */
+.screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     padding: 20px;
 }
 
-.game-container {
+.screen.active {
+    display: block;
+}
+
+.screen.overlay {
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tela de Início */
+.start-container {
+    max-width: 600px;
+    margin: 100px auto;
+    text-align: center;
+    background: rgba(30, 30, 46, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid #4cc9f0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.start-container h1 {
+    font-size: 3.5rem;
+    margin-bottom: 30px;
+    color: #4cc9f0;
+    text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+}
+
+.start-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.btn-primary, .btn-secondary, .btn-tertiary {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4cc9f0 0%, #4361ee 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(76, 201, 240, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #e6e6e6;
+    border: 1px solid #4cc9f0;
+}
+
+.btn-tertiary {
+    background: transparent;
+    color: #888;
+    border: 1px solid #444;
+}
+
+.version {
+    margin-top: 40px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Tela de Seleção de Classes */
+.class-select-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    background: rgba(30, 30, 46, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #f72585;
+}
+
+.class-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.class-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.class-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+}
+
+.class-card.selected {
+    border-color: #f72585;
+    background: rgba(247, 37, 133, 0.1);
+}
+
+.class-card .class-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.class-card h4 {
+    color: #4cc9f0;
+    margin-bottom: 5px;
+}
+
+.class-card p {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.class-card .class-stats {
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.selected-classes {
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.selected-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 10px;
+    margin-top: 10px;
 }
 
-.room-display {
-    background: #2a2a2a;
-    padding: 20px;
+.selected-class {
+    background: rgba(76, 201, 240, 0.2);
+    padding: 10px 15px;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.class-select-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+/* Layout Principal do Jogo */
+.game-layout {
+    display: flex;
+    height: calc(100vh - 40px);
+    gap: 10px;
+}
+
+.dungeon-map {
+    flex: 0 0 300px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 15px;
+    overflow: auto;
+}
+
+.map-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 20px);
+    grid-template-rows: repeat(10, 20px);
+    gap: 1px;
+    margin-top: 15px;
+}
+
+.map-cell {
+    width: 20px;
+    height: 20px;
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 2px;
+}
+
+.map-cell.current {
+    background: #4cc9f0;
+    border-color: #4cc9f0;
+}
+
+.map-cell.explored {
+    background: #444;
+}
+
+.map-cell.unexplored {
+    background: #111;
+}
+
+.map-cell.entrance {
+    background: #f72585;
+}
+
+.main-game-area {
     flex: 1;
-    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.content-display {
-    background: #2a2a2a;
-    padding: 20px;
+.current-room, .room-content, .game-controls, .game-log {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.game-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.control-btn {
+    padding: 10px 15px;
+    background: rgba(76, 201, 240, 0.2);
+    border: 1px solid #4cc9f0;
+    color: #e6e6e6;
     border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: rgba(76, 201, 240, 0.4);
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.game-log {
     flex: 1;
-    min-width: 300px;
+    min-height: 150px;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
-.controls-display {
-    background: #2a2a2a;
-    padding: 20px;
+.log-messages {
+    font-family: monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.log-message {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #333;
+}
+
+.party-panel {
+    flex: 0 0 250px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.party-status {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.character-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
     border-radius: 5px;
-    width: 100%;
+    border-left: 3px solid #4cc9f0;
 }
 
-.room-grid {
+.character-card .health-bar {
+    height: 8px;
+    background: #333;
+    border-radius: 4px;
+    margin-top: 5px;
+    overflow: hidden;
+}
+
+.health-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f72585 0%, #4cc9f0 100%);
+    border-radius: 4px;
+}
+
+.inventory-panel {
+    margin-top: 20px;
+}
+
+/* Responsividade básica */
+@media (max-width: 1200px) {
+    .game-layout {
+        flex-direction: column;
+    }
+    
+    .dungeon-map, .party-panel {
+        flex: none;
+        width: 100%;
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .start-container h1 {
+        font-size: 2.5rem;
+    }
+    
+    .class-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .game-layout {
+        height: auto;
+    }
+
+    /* Adicione ao final do style.css */
+
+.simple-grid {
     background: #000;
     padding: 10px;
     display: inline-block;
     margin: 10px 0;
+    font-family: monospace;
+    line-height: 1;
 }
 
-.grid-row {
-    clear: both;
-}
-
-.cell {
-    width: 24px;
-    height: 24px;
-    float: left;
+.grid-cell {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
     text-align: center;
-    line-height: 24px;
-    border: 1px solid #333;
-    font-size: 12px;
+    line-height: 20px;
+    font-family: monospace;
 }
 
 .cell.floor { background: #444; color: #aaa; }
 .cell.wall { background: #666; color: #ddd; }
 .cell.door { background: #8B4513; color: #fff; font-weight: bold; }
-.cell.void { background: transparent; border-color: transparent; }
+.cell.player { background: #ff0000; color: white; font-weight: bold; }
+.cell.void { background: transparent; }
 
-button {
-    background: #4a4a4a;
-    color: #fff;
-    border: 1px solid #666;
-    padding: 10px 15px;
-    margin: 5px;
-    cursor: pointer;
-    font-family: inherit;
-    border-radius: 3px;
+.exits-section {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 5px;
 }
 
-button:hover {
-    background: #5a5a5a;
-}
-
-.exit-btn {
-    background: #2d5a2d;
+.exits-section h4 {
+    margin-bottom: 10px;
+    color: #4cc9f0;
 }
 
 .back-btn {
+    margin-top: 10px;
     background: #5a2d2d;
 }
 
-h3, h4 {
-    color: #fff;
-    margin-top: 0;
+.remove-class {
+    background: transparent;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+
+.remove-class:hover {
+    color: #ff0000;
+}
+
+/* Ajuste para o log */
+.log-messages {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.log-message {
+    padding: 5px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 5px;
+}
 }
